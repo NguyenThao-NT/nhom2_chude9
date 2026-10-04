@@ -61,3 +61,21 @@ string TaiKhoan::getSoTK() {
 long long TaiKhoan::getSoDu() {
     return soDu;
 }
+
+void DanhSachTaiKhoan::sapXep() {
+    for (int i = 0; i < n - 1; i++)
+        for (int j = i + 1; j < n; j++)
+            if (a[i].getSoDu() < a[j].getSoDu()) {
+                TaiKhoan tam = a[i];
+                a[i] = a[j];
+                a[j] = tam;
+            }
+}
+
+int DanhSachTaiKhoan::timKiem(string soTK) {
+    for (int i = 0; i < n; i++)
+        if (a[i].getSoTK() == soTK)
+            return i;
+
+    return -1;
+}
