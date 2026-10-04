@@ -61,3 +61,31 @@ string TaiKhoan::getSoTK() {
 long long TaiKhoan::getSoDu() {
     return soDu;
 }
+
+void TaiKhoan::napTien(long long tien) {
+    if (tien > 0)
+        soDu += tien;
+}
+
+void TaiKhoan::rutTien(long long tien) {
+    if (tien > 0 && tien <= soDu)
+        soDu -= tien;
+}
+
+double TaiKhoan::tinhLai() {
+    return soDu * laiSuat / 100;
+}
+
+void TaiKhoan::napTien(long long tien) {
+    if (tien > 0)
+        soDu += tien;
+}
+
+void TaiKhoan::rutTien(long long tien) {
+    if (tien > 0 && tien <= soDu)
+        soDu -= tien;
+}
+
+double TaiKhoan::tinhLai() {
+    return soDu * laiSuat / 100;
+}
