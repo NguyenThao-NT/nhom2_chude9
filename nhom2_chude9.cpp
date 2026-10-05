@@ -76,19 +76,6 @@ double TaiKhoan::tinhLai() {
     return soDu * laiSuat / 100;
 }
 
-void TaiKhoan::napTien(long long tien) {
-    if (tien > 0)
-        soDu += tien;
-}
-
-void TaiKhoan::rutTien(long long tien) {
-    if (tien > 0 && tien <= soDu)
-        soDu -= tien;
-}
-
-double TaiKhoan::tinhLai() {
-    return soDu * laiSuat / 100;
-}
 class DanhSachTaiKhoan {
 private:
     TaiKhoan a[200];
@@ -144,7 +131,23 @@ void DanhSachTaiKhoan::xuatMotTaiKhoan(int viTri) {
     if (viTri >= 0 && viTri < n)
         a[viTri].xuat();
 }
+void DanhSachTaiKhoan::sapXep() {
+    for (int i = 0; i < n - 1; i++)
+        for (int j = i + 1; j < n; j++)
+            if (a[i].getSoDu() < a[j].getSoDu()) {
+                TaiKhoan tam = a[i];
+                a[i] = a[j];
+                a[j] = tam;
+            }
+}
 
+int DanhSachTaiKhoan::timKiem(string soTK) {
+    for (int i = 0; i < n; i++)
+        if (a[i].getSoTK() == soTK)
+            return i;
+
+    return -1;
+}
 
 
 
