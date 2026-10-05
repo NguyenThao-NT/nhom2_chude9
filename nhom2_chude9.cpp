@@ -139,3 +139,121 @@ void DanhSachTaiKhoan::xuatDanhSach() {
         a[i].xuat();
     }
 }
+
+void DanhSachTaiKhoan::xuatMotTaiKhoan(int viTri) {
+    if (viTri >= 0 && viTri < n)
+        a[viTri].xuat();
+}
+
+void DanhSachTaiKhoan::sapXep() {
+    for (int i = 0; i < n - 1; i++)
+        for (int j = i + 1; j < n; j++)
+            if (a[i].getSoDu() < a[j].getSoDu()) {
+                TaiKhoan tam = a[i];
+                a[i] = a[j];
+                a[j] = tam;
+            }
+}
+
+int DanhSachTaiKhoan::timKiem(string soTK) {
+    for (int i = 0; i < n; i++)
+        if (a[i].getSoTK() == soTK)
+            return i;
+
+    return -1;
+}
+
+void DanhSachTaiKhoan::themTaiKhoan(int viTri) {
+    if (n >= 199) {
+        cout << "Danh sach da day!\n";
+        return;
+    }
+
+    if (viTri < 1 || viTri > n + 1) {
+        cout << "Vi tri khong hop le!\n";
+        return;
+    }
+
+    for (int i = n; i >= viTri; i--)
+        a[i] = a[i - 1];
+
+    cout << "\nNhap tai khoan moi:\n";
+    a[viTri - 1].nhap();
+    n++;
+}
+
+void DanhSachTaiKhoan::xoaTaiKhoan(int viTri) {
+    if (viTri < 1 || viTri > n) {
+        cout << "Vi tri khong hop le!\n";
+        return;
+    }
+
+    for (int i = viTri - 1; i < n - 1; i++)
+        a[i] = a[i + 1];
+
+    n--;
+}
+
+int main() {
+    DanhSachTaiKhoan ds;
+    int chon;
+
+    do {
+        cout << "\n========== MENU ==========\n";
+        cout << "1. Nhap danh sach tai khoan\n";
+        cout << "2. Xuat danh sach tai khoan\n";
+        cout << "3. Sap xep giam dan theo so du\n";
+        cout << "4. Tim kiem theo so tai khoan\n";
+        cout << "5. Them tai khoan\n";
+        cout << "6. Xoa tai khoan\n";
+        cout << "0. Thoat\n";
+        cout << "===========================\n";
+        cout << "Nhap lua chon: ";
+        cin >> chon;
+
+        if (chon == 1) {
+            ds.nhapDanhSach();
+        }
+        else if (chon == 2) {
+            ds.xuatDanhSach();
+        }
+        else if (chon == 3) {
+            DanhSachTaiKhoan dsSapXep(ds);
+            dsSapXep.sapXep();
+            cout << "\nDanh sach sau khi sap xep:\n";
+            dsSapXep.xuatDanhSach();
+        }
+        else if (chon == 4) {
+            string soTK;
+            cout << "Nhap so tai khoan can tim: ";
+            cin >> soTK;
+
+            int viTri = ds.timKiem(soTK);
+
+            if (viTri == -1)
+                cout << "Khong tim thay tai khoan!\n";
+            else {
+                cout << "\nTim thay tai khoan tai vi tri "
+                     << viTri + 1 << ":\n";
+                ds.xuatMotTaiKhoan(viTri);
+            }
+        }
+        else if (chon == 5) {
+            int viTri;
+            cout << "Nhap vi tri can them: ";
+            cin >> viTri;
+            ds.themTaiKhoan(viTri);
+        }
+        else if (chon == 6) {
+            int viTri;
+            cout << "Nhap vi tri can xoa: ";
+            cin >> viTri;
+            ds.xoaTaiKhoan(viTri);
+        }
+        else if (chon != 0) {
+            cout << "Lua chon khong hop le!\n";
+        }
+
+    } while (chon != 0);
+    return 0;
+}
