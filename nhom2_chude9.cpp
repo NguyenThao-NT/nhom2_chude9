@@ -148,40 +148,36 @@ int DanhSachTaiKhoan::timKiem(string soTK) {
 
     return -1;
 }
+void DanhSachTaiKhoan::themTaiKhoan(int viTri) {
+    if (n >= 199) {
+        cout << "Danh sach da day!\n";
+        return;
+    }
 
+    if (viTri < 1 || viTri > n + 1) {
+        cout << "Vi tri khong hop le!\n";
+        return;
+    }
 
+    for (int i = n; i >= viTri; i--)
+        a[i] = a[i - 1];
 
+    cout << "\nNhap tai khoan moi:\n";
+    a[viTri - 1].nhap();
+    n++;
+}
 
+void DanhSachTaiKhoan::xoaTaiKhoan(int viTri) {
+    if (viTri < 1 || viTri > n) {
+        cout << "Vi tri khong hop le!\n";
+        return;
+    }
 
+    for (int i = viTri - 1; i < n - 1; i++)
+        a[i] = a[i + 1];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    n--;
+}
 
 int main() {
     DanhSachTaiKhoan ds;
